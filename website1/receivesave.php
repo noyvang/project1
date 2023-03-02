@@ -1,0 +1,10 @@
+<?php
+$conn=mysqli_connect('localhost','root','','carseller');
+$id=$_POST['rid'];
+$type=$_POST['type'];
+$name=$_POST['name'];
+$date=$_POST['date'];
+$qty=$_POST['qty'];
+$bprice=$_POST['bprice'];
+$sprice=$_POST['sprice'];
+?>

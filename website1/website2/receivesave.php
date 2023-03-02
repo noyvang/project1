@@ -1,0 +1,10 @@
+<?php
+$conn=mysqli_connect("200.100.100.1","min","1234","saleman_bie");
+$id=$_POST['rid'];
+$type=$_POST['type'];
+$name=$_POST['name'];
+$date=$_POST['date'];
+$qty=$_POST['qty'];
+$bprice=$_POST['bprice'];
+$sprice=$_POST['sprice'];
+?>

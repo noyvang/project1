@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.css">
+<style>
+	*{font-family:phetsarath ot;}
+	label{color:white}
+</style>
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+		$('#save').click(function(){
+			var id=$('#id').val();
+			var qty=$('#qty').val();
+			var bprice=$('#bprice').val();
+			var amount=$('#amount').val();
+			$.post('receives_save.php',
+			{
+				id:id,
+				qty:qty,
+				bprice:bprice,
+				amount:amount
+			},function(a){
+				$('#show').html(a);
+			});
+		});
+		$('#bprice').keyup(function(){
+			var qty=$('#qty').val();
+			var bprice=$('#bprice').val();
+			var amount=qty*bprice;
+			$('#amount').val(amount);
+			});
+			$('#typeid').click(function(){
+				var typeid=$('#typeid').val();
+				$.post('select.php',
+				{
+					typeid:typeid
+				},function(zy){
+					$('#id').val(zy);
+				});
+			});
+	});
+</script>
+<form class="form-horizontal" role="form" >
+	<div class="container">
+		<body background="../photo/https---api.thedrive.com-wp-content-uploads-2018-12-Aperta.jpg">
+		<h1>?????????????</h1>
+		<div class="col-sm-12">
+				<div class="navbar-header">
+					<a class="navbar-brand"><h4>BIE Supercar-Saleman</h4> </a>
+				</div>
+				<ul class="nav navbar-nav">	
+					<li><a href="typeproduct.php" target=""><h4>Brand ??????</h4></a></li>
+					<li><a href="product.php" target=""><h4>??????</h4></a></li>
+					<li><a href="receives.php" target=""><h4>?????????????</h4></a></li>
+					<li><a href="export.php" target=""><h4>?????????????</h4></a></li>
+					<li><a href="user.php" target=""><h4>??????</h4></a></li>
+					<li><a href="installment.php" target=""><h4>????????</h4></a></li>
+					<li><a href="payment.php" target=""><h4>???????</h4></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="../login.php" ><span class="glyphicon glyphicon-log-in"></span><h4>???????????</h4></a></li>
+				</ul>
+				
+			</div>
+			<div class="col-sm-6">
+		
+		<div class="form-group">
+			<label class="control-label col-sm-4">Brand ?????? :</label>
+			<div class="col-sm-8">
+				<select name="id"class="form-control" id="typeid">
+					<option>?????</option>
+						<?php
+							$conn=mysqli_connect("localhost","root","","saleman_bie");
+							$select=mysqli_query($conn,"select*from typeproduct");
+							while($a=mysqli_fetch_array($select)){
+						?>
+					<option value="<?=$a[0];?>"><?=$a[1];?></option>
+					<?php
+							}
+					?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">????????? :</label>
+			<div class="col-sm-8">
+				<input name="id"class="form-control" id="id">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-4">??????????? :</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" id="qty"name="qty" placeholder="????????????...">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4">???????:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" id="bprice"name="bprice" placeholder="???????...">
+			</div>
+		</div>
+		</div>
+		<div class="col-sm-6">
+		<div class="form-group">
+			<label class="control-label col-sm-4">??????????? :</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" name="amount"id="amount"placeholder="???????????..." disabled>
+			</div>
+		</div>
+		 
+		<div class="form-group">
+					<label class="control-label col-sm-3"><div id="show"></div></label>
+					<div class="col-sm-3">
+						<button type="button" class="btn btn-success btn-block" id="save">??????</button>
+					</div>
+					<div class="col-sm-3">
+						<button type="reset" class="btn btn-danger btn-block">??????</button>
+					</div>
+					<div class="col-sm-3">
+						<a href="receives_table.php"><button type="button" class="btn btn-primary btn-block">??????</button></a>
+					</div>
+					
+				</div>
+				</div>
+	</div>
+<form>
